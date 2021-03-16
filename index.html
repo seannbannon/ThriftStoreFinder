@@ -10,20 +10,35 @@
 </head>
 <body>
 
-    <div class="row col">
-        <h1>Search for a Store:</h1>
-    </div>
-    <div class="row col">
-        <form id="form"> 
-            <input type="search" id="query" name="q" placeholder="Chicago...">
-            <button id= "submit" type="button">Search</button>
-          </form>
-    <div id="map">
+    <h2>My Phonebook</h2>
 
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+<ul id="myUL">
+  <li><a href="#">Brown Elephant Chicago, IL</a></li>
+  <li><a href="#">Unique Chicago, Il</a></li>
+
+  <li><a href="#">Monarch Chicago Il</a></li>
+  <li><a href="#">Pilsen Vintage Chicago Il</a></li>
+
+  <li><a href="#">North Town Thrift Kansas City, MO</a></li>
+  <li><a href="#">Blackwell Kansas City, Mo</a></li>
+  <li><a href="#">unLESHed+ Kansas City, Mo</a></li>
+
+  <li><a href="#">Clothz Minded Kansas City, MO</a></li>
+  <li><a href="#">Ultimate Thrift Milwaukee, Wi</a></li>
+  <li><a href="#">Blessed Again Resale Milwaukee, Wi</a></li>
+
+  <li><a href="#">St Vincent Depaul Milwaukee, Wi</a></li>
+  <li><a href="#">Ultimate Thrift Milwaukee, Wi</a></li>
+  <li><a href="#">Tip Top automic Shop Milwaukee, Wi</a></li>
+
+  
+</ul>
     </div>
-    <p>Hello Sean!</p>
     <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVwA7BvelVfoF73H59Nidw7XAIoCAob5Q&callback=initMap">
 </script>
+<script src='script.js'></script>
 </body>
 </html>
