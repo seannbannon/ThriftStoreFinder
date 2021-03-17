@@ -5,40 +5,16 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Thrift Store Finder!</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
 </head>
 <body>
+    <div id="map"></div>
+    <button id="search">Start Searching</button>
 
-    <h2>My Phonebook</h2>
-
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-
-<ul id="myUL">
-  <li><a href="#">Brown Elephant Chicago, IL</a></li>
-  <li><a href="#">Unique Chicago, Il</a></li>
-
-  <li><a href="#">Monarch Chicago Il</a></li>
-  <li><a href="#">Pilsen Vintage Chicago Il</a></li>
-
-  <li><a href="#">North Town Thrift Kansas City, MO</a></li>
-  <li><a href="#">Blackwell Kansas City, Mo</a></li>
-  <li><a href="#">unLESHed+ Kansas City, Mo</a></li>
-
-  <li><a href="#">Clothz Minded Kansas City, MO</a></li>
-  <li><a href="#">Ultimate Thrift Milwaukee, Wi</a></li>
-  <li><a href="#">Blessed Again Resale Milwaukee, Wi</a></li>
-
-  <li><a href="#">St Vincent Depaul Milwaukee, Wi</a></li>
-  <li><a href="#">Ultimate Thrift Milwaukee, Wi</a></li>
-  <li><a href="#">Tip Top automic Shop Milwaukee, Wi</a></li>
-
-  
-</ul>
-    </div>
-    <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVwA7BvelVfoF73H59Nidw7XAIoCAob5Q&callback=initMap">
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVwA7BvelVfoF73H59Nidw7XAIoCAob5Q&libraries=places&callback=initMap">
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src='script.js'></script>
 </body>
 </html>
