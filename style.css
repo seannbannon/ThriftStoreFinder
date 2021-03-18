@@ -33,3 +33,15 @@
   #myUL li a:hover:not(.header) {
     background-color: #eee;
   }
+
+  #map {
+    height: 75%;
+    width: 60%;
+    margin: 0 auto;
+    
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
