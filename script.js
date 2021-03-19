@@ -1,6 +1,3 @@
-
-
-
 //variable used to define map on page
 let map;
 let service;
@@ -32,7 +29,7 @@ function geoFindMe() {
   function error() {
   }
 
-  if (!navigator.geolocation) {
+  if (navigator.geolocation) {
   } else {
     navigator.geolocation.getCurrentPosition(success, error);
   }
