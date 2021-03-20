@@ -51,7 +51,7 @@ $('#search').on('click', function () {
   $('#map').css('display', 'inline-block');
 
   var request = {
-    query: `thrift shops near ${$('#search-bar').val()}`,
+    query: 'thrift shops',
     fields: ['name', 'geometry', 'type', 'formatted_address', 'opening_hours', 'rating', 'photos'],
     location: { lat: lat, lng: long },
     radius: 300
