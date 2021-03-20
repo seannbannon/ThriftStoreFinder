@@ -91,3 +91,11 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  #search-input {
+       
+        margin-top: 1em;
+       
+        width: 300px;
+        padding: 10px;
+  }

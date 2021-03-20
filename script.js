@@ -11,33 +11,42 @@ function initMap() {
     center: { lat: lat, lng: long },
     zoom: 12,
   });
-  // allows the search 
+
+  // Create the search bar
+  const input = document.getElementById("search-input");
+  const searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
+  //search box 
+  searchBox.addListener("places_changed", () => {
+    console.log(searchBox.getPlaces());
+    let place = searchBox.getPlaces()[0];
+    lat = place.geometry.location.lat();
+    long = place.geometry.location.lng();
+    map.setCenter({ lat: lat, lng: long });
+  })
+
+  // Asks the user for their location and sets the map there 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      lat = position.coords.latitude;
+      long = position.coords.longitude
+      initialLocation = new google.maps.LatLng(lat, long);
+      map.setCenter(initialLocation);
+    });
+  }
+
   service = new google.maps.places.PlacesService(map);
 
   // Ask the user for his location and center the map on it if they allow 
-  geoFindMe();
+
 
 }
 
-function geoFindMe() {
-  function success(position) {
-    lat = position.coords.latitude;
-    long = position.coords.longitude;
-    map.setCenter({ lat: lat, lng: long });
-  }
-
-  function error() {
-  }
-
-  if (!navigator.geolocation) {
-  } else {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
-}
-
-
-//click event that searches for all nearby thrift shops 
+//click event that searches for all nearby thrift shops  in a 300m radius
 $('#search').on('click', function () {
   console.log("We clicked on the button!");
   $('#map').css('display', 'inline-block');
@@ -46,58 +55,65 @@ $('#search').on('click', function () {
   var request = {
     query: `thrift shops near ${$('#search-bar').val()}`,
     fields: ['name', 'geometry', 'type', 'formatted_address', 'opening_hours', 'rating', 'photos'],
-    // locationBias: {
-    //   radius: '500'
-    // }
+    location: { lat: lat, lng: long },
+    radius: 300
+
 
   }
   // Go and actually grab all that data about thrift shops (from the query above)
-  service.findPlaceFromQuery(request, function (results, status) {
+  let markers = [];
+  let infoWindows = [];
+  service.textSearch(request, function (results, status) {
     console.log('results', results);
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
+      for (let i = 0; i < results.length; i++) {
         // For each result create a marker and a tooltip 
         var shop = results[i];
         var name = shop.name;
         var address = shop.formatted_address;
         var hours = shop.opening_hours;
         var rating = shop.rating;
-        var infowindow = new google.maps.InfoWindow({
+        var icon = {
+          url: './thriftstoreicon_25x25.png',
+          scaledSize: new google.maps.Size(25, 25),
+          origin: google.maps.Point(0, 0),
+          anchor: google.maps.Point(0, 0),
+        }
+
+        if (shop.icon != null) {
+          icon.url = shop.icon;
+        }
+        infoWindows[i] = new google.maps.InfoWindow({
           content: `
           <div class="tool-tip">
-            <p class="store-name">${name}</p>
-            <p class="rating">${rating}</p>
+            <h3 class="store-name">${name}</h3>
+            <p class="rating">Rating: ${rating}</p>
             <p class="address">${address}</p>
-            
           </div >
 
           `
         });
 
-        var marker = new google.maps.Marker({
+        markers[i] = new google.maps.Marker({
           position: { lat: results[i].geometry.location.lat(), lng: results[i].geometry.location.lng() },
           map,
           title: results[i].name,
-          icon: './thriftstoreicon_25x25.png'
-        });
-
-        // Make amrker clickable to show the tooltip 
-        marker.addListener("click", () => {
-          infowindow.open(map, marker);
+          icon: icon,
+          id: i
         });
 
 
-        marker.setMap(map);
+        google.maps.event.addListener(markers[i], 'click', function () {
+          infoWindows[this.id].open(map, markers[this.id]);
+          map.panTo(markers[this.id].getPosition());
+        });
 
 
-
-
-        console.log(results[i]);
-        // map.createMarker(results[i]);
       }
-      map.setCenter(results[0].geometry.location);
     }
   })
 
 
 })
+
+
