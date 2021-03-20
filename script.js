@@ -1,6 +1,3 @@
-
-
-
 //variable used to define map on page
 let map;
 let service;
@@ -42,8 +39,12 @@ function geoFindMe() {
 
 //click event that searches for all nearby thrift shops 
 $('#search').on('click', function () {
+  console.log("We clicked on the button!");
+  $('#map').css('display', 'inline-block');
+  console.log("I hope the map showed up!");
+
   var request = {
-    query: 'thrift shops',
+    query: `thrift shops near ${$('#search-bar').val()}`,
     fields: ['name', 'geometry', 'type', 'formatted_address', 'opening_hours', 'rating', 'photos'],
     // locationBias: {
     //   radius: '500'
