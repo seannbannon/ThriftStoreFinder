@@ -48,8 +48,12 @@ function initMap() {
 
 //click event that searches for all nearby thrift shops  in a 300m radius
 $('#search').on('click', function () {
+  console.log("We clicked on the button!");
+  $('#map').css('display', 'inline-block');
+  console.log("I hope the map showed up!");
+
   var request = {
-    query: 'thrift shops',
+    query: `thrift shops near ${$('#search-bar').val()}`,
     fields: ['name', 'geometry', 'type', 'formatted_address', 'opening_hours', 'rating', 'photos'],
     location: { lat: lat, lng: long },
     radius: 300

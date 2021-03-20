@@ -80,6 +80,7 @@ body {
   }
 
   #map {
+    display: none;
     height: 75%;
     width: 60%;
     margin: 0 auto;
