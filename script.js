@@ -62,8 +62,7 @@ $('#search').on('click', function () {
   let markers = [];
   let infoWindows = [];
   service.textSearch(request, function (results, status) {
-    console.log('results', results);
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (let i = 0; i < results.length; i++) {
         // For each result create a marker and a tooltip 
         var shop = results[i];
