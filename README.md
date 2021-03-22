@@ -16,10 +16,13 @@ Our original motivation was to find Local Thrift Stores, comic book stores, and 
 
 **Screenshots:**
 Landing Page
+<img src= "Screen Shot 2021-03-22 at 5.23.30 PM.png" width="600">
 
 Results, example 1
+<img src ="Screen Shot 2021-03-22 at 5.24.06 PM.png" width="600">
 
 Results, example 2
+<img src = "Screen Shot 2021-03-22 at 5.26.57 PM.png" width = "600">
 
 **Features:**
 The StraightVintage App allows users to search for thrift stores anywhere in the world, all while recieving a humorous Chuck Norris joke. The app displays a map- and pinpoints where these stores are located, allowing the user to trace their projected path along where they would like to go shopping, all while laughing merrily at silly Chuck Norris jokes. 
