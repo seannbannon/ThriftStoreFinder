@@ -155,6 +155,14 @@ $(document).ready(function () {
     }
   }
 
+  $("#clear-page").on("click", function(){
+    localStorage.clear();
+    window.location.reload();
+    initPage();
+
+
+  }); 
+
 
 })
 
