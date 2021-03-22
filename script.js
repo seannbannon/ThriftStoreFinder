@@ -101,8 +101,9 @@ $('#search').on('click', function () {
           id: i
         });
 
-
+        console.log(shop)
         google.maps.event.addListener(markers[i], 'click', function () {
+          console.log(this.id)
           infoWindows[this.id].open(map, markers[this.id]);
           map.panTo(markers[this.id].getPosition());
         });
@@ -124,18 +125,24 @@ $(document).ready(function () {
     var obj = { store: store, address: address };
     // Grab any existing favorites they already have
 
-    var existingFavorites = JSON.parse(localStorage.getItem('favorites'));
-    if (existingFavorites == null) {
-      existingFavorites = [];
-    }
 
     existingFavorites.push(obj)
 
     // Store it back in their local storage 
     localStorage.setItem("favorites", JSON.stringify(existingFavorites))
+      
+        $('.favorites').append(`
+        <div class="favorite">
+        <p>Name: ${obj.store} </p>
+        <p>Address: ${obj.address}</p>
+        </div>
+      `)
   })
 
   var existingFavorites = JSON.parse(localStorage.getItem('favorites'));
+  if (existingFavorites == null) {
+    existingFavorites = [];
+  }
   if (existingFavorites !== null) {
     for (let i = 0; i < existingFavorites.length; i++) {
       var favorite = existingFavorites[i];
@@ -147,6 +154,7 @@ $(document).ready(function () {
     `)
     }
   }
+
 
 })
 
