@@ -62,7 +62,7 @@ $('#search').on('click', function () {
   let markers = [];
   let infoWindows = [];
   service.textSearch(request, function (results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (let i = 0; i < results.length; i++) {
         // For each result create a marker and a tooltip 
         var shop = results[i];
@@ -86,7 +86,9 @@ $('#search').on('click', function () {
             <h3 class="store-name">${name}</h3>
             <p class="rating">Rating: ${rating}</p>
             <p class="address">${address}</p>
-          </div >
+            <button class="favorite-button">
+            save</button> 
+          </div>
 
           `
         });
@@ -105,7 +107,6 @@ $('#search').on('click', function () {
           map.panTo(markers[this.id].getPosition());
         });
 
-
       }
     }
   })
@@ -113,4 +114,39 @@ $('#search').on('click', function () {
 
 })
 
+$(document).ready(function () {
+
+  $(document).on('click', '.favorite-button', function () {
+    console.log('button clicked')
+    // Grab the store name and address of the place that they wanna save
+    var store = $(this).siblings(".store-name").text()
+    var address = $(this).siblings(".address").text()
+    var obj = { store: store, address: address };
+    // Grab any existing favorites they already have
+
+    var existingFavorites = JSON.parse(localStorage.getItem('favorites'));
+    if (existingFavorites == null) {
+      existingFavorites = [];
+    }
+
+    existingFavorites.push(obj)
+
+    // Store it back in their local storage 
+    localStorage.setItem("favorites", JSON.stringify(existingFavorites))
+  })
+
+  var existingFavorites = JSON.parse(localStorage.getItem('favorites'));
+  if (existingFavorites !== null) {
+    for (let i = 0; i < existingFavorites.length; i++) {
+      var favorite = existingFavorites[i];
+      $('.favorites').append(`
+      <div class="favorite">
+      <p>Name: ${favorite.store} </p>
+      <p>Address: ${favorite.address}</p>
+      </div>
+    `)
+    }
+  }
+
+})
 
